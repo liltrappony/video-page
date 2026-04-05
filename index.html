@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои видео</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .category {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .category h2 {
+            margin: 0 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0066cc;
+            color: #0066cc;
+        }
+        .video-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .video-link {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            display: block;
+            border: 1px solid #ddd;
+            transition: 0.3s;
+        }
+        .video-link:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        .initials {
+            display: inline-block;
+            background: #0066cc;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📚 Известные русские деятели и места</h1>
+
+    <div id="content"></div>
+
+    <script>
+        const categories = {
+            "✍️ Писатели и поэты": [
+                { name: "Александр Пушкин", initials: "А.С.", url: "https://disk.yandex.ru/i/GlcLD5T36E465w" },
+                { name: "Сергей Есенин", initials: "С.А.", url: "https://disk.yandex.ru/i/RkMYOtjWMZ0mMw" },
+                { name: "Анна Ахматова", initials: "А.А.", url: "https://disk.yandex.ru/i/yys20LgHNSuufg" },
+                { name: "Марина Цветаева", initials: "М.И.", url: "https://disk.yandex.ru/i/DLDwp7Z6DzJTsw" },
+                { name: "Лев Толстой", initials: "Л.Н.", url: "https://disk.yandex.ru/i/ia9Lda6oSddHIw" },
+                { name: "Антон Чехов", initials: "А.П.", url: "https://disk.yandex.ru/i/OMG8ItkUit-unQ" }
+            ],
+            "🎨 Художники": [
+                { name: "Иван Айвазовский", initials: "И.К.", url: "https://disk.yandex.ru/i/f9dh8_eK-JNdzg" },
+                { name: "Виктор Васнецов", initials: "В.М.", url: "https://disk.yandex.ru/i/-K2Ap-mK5FumTA" },
+                { name: "Иван Шишкин", initials: "И.И.", url: "https://disk.yandex.ru/i/U375YBOhO38yjw" }
+            ],
+            "🎵 Композиторы": [
+                { name: "Пётр Чайковский", initials: "П.И.", url: "https://disk.yandex.ru/i/DS7VLF0WtAAZGw" }
+            ],
+            "🔬 Учёные": [
+                { name: "Дмитрий Менделеев", initials: "Д.И.", url: "https://disk.yandex.ru/i/ImgmuK3xrpJQaQ" },
+                { name: "Иван Павлов", initials: "И.П.", url: "https://disk.yandex.ru/i/4VNj5eOhKYUvYg" },
+                { name: "Александр Попов", initials: "А.С.", url: "https://disk.yandex.ru/i/AKjjWOaenrvlJw" }
+            ],
+            "⚽ Спортсмены": [
+                { name: "Эдуард Стрельцов", initials: "Э.А.", url: "https://disk.yandex.ru/i/InS4q14BtuTGYA" },
+                { name: "Валерий Харламов", initials: "В.Б.", url: "https://disk.yandex.ru/i/chsJjAKXc_3sSA" }
+            ],
+            "⚔️ Военачальники": [
+                { name: "Александр Суворов", initials: "А.В.", url: "https://disk.yandex.ru/i/ELmjPrUrYx5CWg" },
+                { name: "Фёдор Ушаков", initials: "Ф.Ф.", url: "https://disk.yandex.ru/i/4QQn6cHYNhXIQw" }
+            ],
+            "🌳 Места": [
+                { name: "Золотое кольцо", initials: "", url: "https://disk.yandex.ru/i/9ef7fzlK0qvunQ" }
+            ]
+        };
+
+        const container = document.getElementById('content');
+        
+        for (const [category, videos] of Object.entries(categories)) {
+            const categoryDiv = document.createElement('div');
+            categoryDiv.className = 'category';
+            categoryDiv.innerHTML = `<h2>${category}</h2><div class="video-list"></div>`;
+            
+            const videoList = categoryDiv.querySelector('.video-list');
+            
+            videos.forEach(video => {
+                const link = document.createElement('a');
+                link.href = video.url;
+                link.target = "_blank";
+                link.className = 'video-link';
+                
+                if (video.initials) {
+                    link.innerHTML = `<span class="initials">${video.initials}</span> ${video.name}`;
+                } else {
+                    link.innerHTML = video.name;
+                }
+                
+                videoList.appendChild(link);
+            });
+            
+            container.appendChild(categoryDiv);
+        }
+    </script>
+</body>
+</html>
